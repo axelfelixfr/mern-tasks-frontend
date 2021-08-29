@@ -30,21 +30,10 @@ const Title = styled.h1`
   margin-top: 0;
 `;
 
-// const ContainerButton = styled.div`
-//   margin: 0 auto;
-//   text-align: center;
-//   padding-top: 1rem;
-// `;
-
-// const LinkDecoration = styled(Link)`
-//   text-decoration: none;
-//   color: black;
-// `;
-
 export const AuthRouter = () => {
   let { pathname } = useLocation();
 
-  let titleForm = pathname === '/login' ? 'Iniciar sesión' : 'Registro';
+  const titleForm = pathname === '/login' ? 'Iniciar sesión' : 'Registro';
 
   return (
     <ContainerForm>
