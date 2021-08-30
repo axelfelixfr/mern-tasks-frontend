@@ -37,7 +37,8 @@ const LogoHeader = styled.div`
 
 export const Header = () => {
   const ProjectsContext = useContext(ProjectContext);
-  const { openModalProject, projects, getProjects } = ProjectsContext;
+  const { openModalProject, projects, getProjects, selectedProject } =
+    ProjectsContext;
 
   useEffect(() => {
     getProjects();
@@ -101,9 +102,13 @@ export const Header = () => {
                   menuAlignment="right"
                   icon={<FontAwesomeIcon icon={faAngleDown} />}
                 >
-                  <MenuItem label="Proyectos" variant="header" />
+                  <MenuItem label="Tus Proyectos" variant="header" />
                   {projects.map(project => (
-                    <MenuItem key={project.id} label={project.name} />
+                    <MenuItem
+                      onClick={() => selectedProject(project.id)}
+                      key={project.id}
+                      label={project.name}
+                    />
                   ))}
 
                   {/* <MenuItem label="Menu Item" /> */}

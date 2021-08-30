@@ -20,6 +20,23 @@ export const projectsReducer = (state = {}, action) => {
         projects: [...state.projects, action.payload]
       };
 
+    case types.selectProject:
+      return {
+        ...state,
+        selectProject: state.projects.filter(
+          project => project.id === action.payload
+        )
+      };
+
+    case types.deleteProject:
+      return {
+        ...state,
+        projects: state.projects.filter(
+          project => project.id !== action.payload
+        ),
+        selectProject: null
+      };
+
     default:
       return state;
   }

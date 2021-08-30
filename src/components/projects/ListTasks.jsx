@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { Task } from './Task';
 import { ButtonIcon } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const ContainerList = styled.div`
   margin: 30px;
@@ -36,6 +37,15 @@ export const ListTasks = () => {
   // };
   // const style = { width: '250px' };
 
+  const ProjectsContext = useContext(ProjectContext);
+  const { selectProject, deleteProject } = ProjectsContext;
+
+  if (!selectProject) {
+    return <TitleTasks>Selecciona un proyecto o crea uno</TitleTasks>;
+  }
+
+  const [actualProject] = selectProject;
+
   const tasks = [
     { id: 1, name: 'Elegir base de datos', complete: true },
     { id: 2, name: 'Hacer el diseño', complete: false },
@@ -43,9 +53,13 @@ export const ListTasks = () => {
     { id: 4, name: 'Hacer testing', complete: false }
   ];
 
+  const handleDeleteProject = () => {
+    deleteProject(actualProject.id);
+  };
+
   return (
     <ContainerList>
-      <TitleTasks>Proyecto de React</TitleTasks>
+      <TitleTasks>Proyecto: {actualProject.name}</TitleTasks>
 
       {!tasks.length ? (
         <NotFound>No hay tareas</NotFound>
@@ -57,6 +71,7 @@ export const ListTasks = () => {
         <ButtonIcon
           shaded
           variant="destructive"
+          onClick={handleDeleteProject}
           size="large"
           tooltip="Borrar proyecto"
           icon={<FontAwesomeIcon icon={faTrashAlt} />}

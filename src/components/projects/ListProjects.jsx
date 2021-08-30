@@ -9,7 +9,7 @@ import {
 
 export const ListProjects = () => {
   const ProjectsContext = useContext(ProjectContext);
-  const { projects, getProjects } = ProjectsContext;
+  const { projects, getProjects, selectedProject } = ProjectsContext;
 
   useEffect(() => {
     getProjects();
@@ -37,6 +37,7 @@ export const ListProjects = () => {
           >
             {projects.map(project => (
               <VerticalItem
+                onClick={() => selectedProject(project.id)}
                 key={project.id}
                 name={project.name}
                 label={project.name}

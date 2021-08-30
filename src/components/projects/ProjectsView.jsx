@@ -20,7 +20,7 @@ const ContainerApp = styled.div`
 
 export const ProjectsView = () => {
   const ProjectsContext = useContext(ProjectContext);
-  const { modalProject, openModalProject } = ProjectsContext;
+  const { modalProject, openModalProject, selectProject } = ProjectsContext;
 
   const { isTabletOrMobile, isDesktopOrLaptop } = Breakpoints();
 
@@ -47,8 +47,7 @@ export const ProjectsView = () => {
         >
           <FormModal />
         </Modal>
-
-        <FormTasks />
+        {selectProject && <FormTasks />}
 
         <ListTasks />
 

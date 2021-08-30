@@ -7,7 +7,8 @@ export const ProjectContext = createContext();
 const ProjectProvider = props => {
   const initialState = {
     modalProject: false,
-    projects: []
+    projects: [],
+    selectProject: null
   };
 
   const projects = [
@@ -40,14 +41,31 @@ const ProjectProvider = props => {
     });
   };
 
+  const selectedProject = idProject => {
+    dispatch({
+      type: types.selectProject,
+      payload: idProject
+    });
+  };
+
+  const deleteProject = idProject => {
+    dispatch({
+      type: types.deleteProject,
+      payload: idProject
+    });
+  };
+
   return (
     <ProjectContext.Provider
       value={{
         modalProject: state.modalProject,
         projects: state.projects,
+        selectProject: state.selectProject,
         openModalProject,
         getProjects,
-        newProject
+        newProject,
+        selectedProject,
+        deleteProject
       }}
     >
       {props.children}
