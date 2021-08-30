@@ -23,7 +23,7 @@ export const Task = ({ task }) => {
 
   const titleComplete = complete ? 'Completa' : 'Incompleta';
 
-  const variantTask = complete ? 'success' : 'error';
+  const variantTask = complete ? 'success' : 'neutral';
 
   return (
     <ContainerTask>

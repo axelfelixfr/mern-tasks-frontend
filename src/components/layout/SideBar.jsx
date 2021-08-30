@@ -1,12 +1,6 @@
 import React from 'react';
-import {
-  Chip,
-  Sidebar,
-  SidebarItem,
-  VerticalItem,
-  VerticalNavigation,
-  VerticalSection
-} from 'react-rainbow-components';
+import { ListProjects } from '../projects/ListProjects';
+import { Chip, Sidebar, SidebarItem } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
@@ -41,7 +35,7 @@ export const SideBar = ({ setOpenModal }) => {
         <Logo>
           <Chip
             className="rainbow-m-around_medium"
-            label="MERNTasks"
+            label="ProjectsMERN"
             variant="neutral"
           />
           <img
@@ -62,21 +56,8 @@ export const SideBar = ({ setOpenModal }) => {
           label="Nuevo Proyecto"
           onClick={handleOnClick}
         />
-        <VerticalNavigation
-        // selectedItem={selectedItem}
-        //       onSelect={this.handleOnSelect}
-        >
-          <VerticalSection
-            label="TUS PROYECTOS"
-            className={css`
-              text-align: center;
-            `}
-          >
-            <VerticalItem name="item-1" label="Recent" />
-            <VerticalItem name="item-2" label="Projects" />
-            <VerticalItem name="item-3" label="Settings" />
-          </VerticalSection>
-        </VerticalNavigation>
+
+        <ListProjects />
       </Sidebar>
     </>
   );
