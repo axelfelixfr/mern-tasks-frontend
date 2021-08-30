@@ -5,6 +5,8 @@ import { Button, Modal } from 'react-rainbow-components';
 import { FormModal } from './FormModal';
 import { Breakpoints } from '../layout/Breakpoints';
 import { Header } from '../layout/Header';
+import { FormTasks } from './FormTasks';
+import { ListTasks } from './ListTasks';
 
 const ContainerProjects = styled.div`
   display: flex;
@@ -12,7 +14,6 @@ const ContainerProjects = styled.div`
 `;
 
 const ContainerApp = styled.div`
-  background-color: #fafaf9;
   width: 100%;
 `;
 
@@ -45,8 +46,12 @@ export const ProjectsView = () => {
           <FormModal />
         </Modal>
 
-        {isDesktopOrLaptop && <p>Estas en computadora</p>}
-        {isTabletOrMobile && <p>Estas en un celular</p>}
+        <FormTasks />
+
+        <ListTasks />
+
+        {/* {isDesktopOrLaptop && <p>Estas en computadora</p>}
+        {isTabletOrMobile && <p>Estas en un celular</p>} */}
       </ContainerApp>
     </ContainerProjects>
   );
