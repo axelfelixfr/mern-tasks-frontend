@@ -8,21 +8,20 @@ import {
   VerticalSection
 } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandRock, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 import LogoTask from '../../assets/task.svg';
 
 const Logo = styled.div`
-  text-align: center;
-  padding-top: 1rem;
+  display: flex;
+  width: 100%;
+  flex-flow: column-reverse;
+  align-items: center;
+  padding-top: 15px;
 `;
 
 export const SideBar = ({ setOpenModal }) => {
-  const titleStyles = {
-    marginBottom: 10
-  };
-
   const handleOnClick = () => {
     setOpenModal(true);
   };
@@ -33,26 +32,29 @@ export const SideBar = ({ setOpenModal }) => {
 
   return (
     <>
-      <Sidebar id="sidebar">
+      <Sidebar
+        id="sidebar"
+        className={css`
+          min-width: 250px;
+        `}
+      >
         <Logo>
           <Chip
             className="rainbow-m-around_medium"
             label="MERNTasks"
             variant="neutral"
-            style={titleStyles}
           />
           <img
             src={LogoTask}
             alt="Logo Task"
             width="70"
             className={css`
-              margin: 0;
-              padding: 0;
+              margin-bottom: 10px;
             `}
           />
         </Logo>
         <SidebarItem
-          icon={<FontAwesomeIcon icon={faPlusCircle} />}
+          icon={<FontAwesomeIcon size="lg" icon={faPlusCircle} />}
           name="NuevoProyecto"
           className={css`
             color: #01b6f5;
@@ -64,7 +66,12 @@ export const SideBar = ({ setOpenModal }) => {
         // selectedItem={selectedItem}
         //       onSelect={this.handleOnSelect}
         >
-          <VerticalSection label="TUS PROYECTOS">
+          <VerticalSection
+            label="TUS PROYECTOS"
+            className={css`
+              text-align: center;
+            `}
+          >
             <VerticalItem name="item-1" label="Recent" />
             <VerticalItem name="item-2" label="Projects" />
             <VerticalItem name="item-3" label="Settings" />
