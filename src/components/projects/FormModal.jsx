@@ -51,7 +51,6 @@ export const FormModal = () => {
 
   const handleProject = data => {
     newProject(data);
-    console.log(data, 'se ejecuto');
     openModalProject(false);
   };
 

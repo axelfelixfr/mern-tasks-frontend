@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 import { Breakpoints } from './Breakpoints';
@@ -37,7 +37,11 @@ const LogoHeader = styled.div`
 
 export const Header = () => {
   const ProjectsContext = useContext(ProjectContext);
-  const { openModalProject } = ProjectsContext;
+  const { openModalProject, projects, getProjects } = ProjectsContext;
+
+  useEffect(() => {
+    getProjects();
+  }, []);
 
   const { isTabletOrMobile, isDesktopOrLaptop } = Breakpoints();
 
@@ -91,26 +95,26 @@ export const Header = () => {
                 onClick={handleOpenModal}
                 icon={<FontAwesomeIcon icon={faPlus} />}
               />
-              {/* <ButtonIcon
-                    variant="border"
-                    disabled
-                    icon={<FontAwesomeIcon icon={faBell} />}
-                  /> */}
-              <ButtonMenu
-                menuSize="x-small"
-                menuAlignment="right"
-                icon={<FontAwesomeIcon icon={faAngleDown} />}
-              >
-                <MenuItem label="Options" variant="header" />
-                <MenuItem label="Menu Item" />
-                <MenuItem label="Menu Item" />
-                <MenuDivider variant="space" />
+              {!!projects.length && (
+                <ButtonMenu
+                  menuSize="x-small"
+                  menuAlignment="right"
+                  icon={<FontAwesomeIcon icon={faAngleDown} />}
+                >
+                  <MenuItem label="Proyectos" variant="header" />
+                  {projects.map(project => (
+                    <MenuItem key={project.id} label={project.name} />
+                  ))}
+
+                  {/* <MenuItem label="Menu Item" /> */}
+                  {/* <MenuDivider variant="space" />
                 <MenuItem
                   label="Right Icon"
                   icon={<FontAwesomeIcon icon={faTasks} />}
                   iconPosition="right"
-                />
-              </ButtonMenu>
+                /> */}
+                </ButtonMenu>
+              )}
             </ButtonGroup>
           </article>
         )}

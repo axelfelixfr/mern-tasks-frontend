@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { SideBar } from '../layout/SideBar';
 import styled from '@emotion/styled';
 import { Button, Modal } from 'react-rainbow-components';
@@ -22,21 +22,13 @@ export const ProjectsView = () => {
   const ProjectsContext = useContext(ProjectContext);
   const { modalProject, openModalProject } = ProjectsContext;
 
-  // const [isOpen, setOpenStatus] = useState(false);
-
   const { isTabletOrMobile, isDesktopOrLaptop } = Breakpoints();
 
   return (
     <ContainerProjects>
-      {isDesktopOrLaptop && (
-        <SideBar
-        // setOpenModal={setOpenStatus}
-        />
-      )}
+      {isDesktopOrLaptop && <SideBar />}
       <ContainerApp>
-        <Header
-        // setOpenModal={setOpenStatus}
-        />
+        <Header />
         <Modal
           id="modalProjects"
           title="Agrega un nuevo proyecto"
@@ -53,9 +45,7 @@ export const ProjectsView = () => {
             </div>
           }
         >
-          <FormModal
-          // setOpenModal={setOpenStatus}
-          />
+          <FormModal />
         </Modal>
 
         <FormTasks />
