@@ -1,11 +1,12 @@
 import React, { useReducer, createContext } from 'react';
 import { projectsReducer } from '../reducers/projectsReducer';
 import { types } from '../types/types';
-
+import { v4 as uuid } from 'uuid';
 export const ProjectContext = createContext();
 
 const ProjectProvider = props => {
   const initialState = {
+    modalProject: false,
     projects: []
   };
 
@@ -21,12 +22,34 @@ const ProjectProvider = props => {
 
   // const { projects } = state;
 
+  const openModalProject = openModal => {
+    dispatch({ type: types.openModalProject, payload: openModal });
+  };
+
   const getProjects = () => {
     dispatch({ type: types.getProjects, payload: projects });
   };
 
+  const newProject = project => {
+    const id = uuid();
+    project.id = id;
+
+    dispatch({
+      type: types.newProject,
+      payload: project
+    });
+  };
+
   return (
-    <ProjectContext.Provider value={{ projects: state.projects, getProjects }}>
+    <ProjectContext.Provider
+      value={{
+        modalProject: state.modalProject,
+        projects: state.projects,
+        openModalProject,
+        getProjects,
+        newProject
+      }}
+    >
       {props.children}
     </ProjectContext.Provider>
   );

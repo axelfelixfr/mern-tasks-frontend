@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { SideBar } from '../layout/SideBar';
 import styled from '@emotion/styled';
 import { Button, Modal } from 'react-rainbow-components';
@@ -7,6 +7,7 @@ import { Breakpoints } from '../layout/Breakpoints';
 import { Header } from '../layout/Header';
 import { FormTasks } from './FormTasks';
 import { ListTasks } from './ListTasks';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const ContainerProjects = styled.div`
   display: flex;
@@ -18,32 +19,43 @@ const ContainerApp = styled.div`
 `;
 
 export const ProjectsView = () => {
-  const [isOpen, setOpenStatus] = useState(false);
+  const ProjectsContext = useContext(ProjectContext);
+  const { modalProject, openModalProject } = ProjectsContext;
+
+  // const [isOpen, setOpenStatus] = useState(false);
 
   const { isTabletOrMobile, isDesktopOrLaptop } = Breakpoints();
 
   return (
     <ContainerProjects>
-      {isDesktopOrLaptop && <SideBar setOpenModal={setOpenStatus} />}
+      {isDesktopOrLaptop && (
+        <SideBar
+        // setOpenModal={setOpenStatus}
+        />
+      )}
       <ContainerApp>
-        <Header setOpenModal={setOpenStatus} />
+        <Header
+        // setOpenModal={setOpenStatus}
+        />
         <Modal
           id="modalProjects"
           title="Agrega un nuevo proyecto"
-          isOpen={isOpen}
-          onRequestClose={() => setOpenStatus(false)}
+          isOpen={modalProject}
+          onRequestClose={() => openModalProject(false)}
           footer={
             <div className="rainbow-flex rainbow-justify_end">
               <Button
                 className="rainbow-m-right_large"
                 label="Cancelar"
                 variant="destructive"
-                onClick={() => setOpenStatus(false)}
+                onClick={() => openModalProject(false)}
               />
             </div>
           }
         >
-          <FormModal />
+          <FormModal
+          // setOpenModal={setOpenStatus}
+          />
         </Modal>
 
         <FormTasks />

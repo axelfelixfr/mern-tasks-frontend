@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ListProjects } from '../projects/ListProjects';
 import { Chip, Sidebar, SidebarItem } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,6 +6,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 import LogoTask from '../../assets/task.svg';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const Logo = styled.div`
   display: flex;
@@ -15,9 +16,12 @@ const Logo = styled.div`
   padding-top: 15px;
 `;
 
-export const SideBar = ({ setOpenModal }) => {
+export const SideBar = () => {
+  const ProjectsContext = useContext(ProjectContext);
+  const { openModalProject } = ProjectsContext;
+
   const handleOnClick = () => {
-    setOpenModal(true);
+    openModalProject(true);
   };
 
   // const handleOnSelect = (event, selectedItem) => {

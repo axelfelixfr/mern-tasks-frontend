@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,6 +6,7 @@ import styled from '@emotion/styled';
 import { Button, Input } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faProjectDiagram } from '@fortawesome/free-solid-svg-icons';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const ContainerButton = styled.div`
   margin: 0 auto;
@@ -25,8 +26,11 @@ const inputStyles = {
 };
 
 export const FormModal = () => {
+  const ProjectsContext = useContext(ProjectContext);
+  const { newProject, openModalProject } = ProjectsContext;
+
   const schema = yup.object().shape({
-    project: yup
+    name: yup
       .string()
       .min(4)
       .max(15)
@@ -46,8 +50,9 @@ export const FormModal = () => {
   });
 
   const handleProject = data => {
-    const { project } = data;
-    console.log(project);
+    newProject(data);
+    console.log(data, 'se ejecuto');
+    openModalProject(false);
   };
 
   return (
@@ -59,10 +64,10 @@ export const FormModal = () => {
         <ContainerForm>
           <Input
             id="input-project"
-            name="project"
-            {...register('project')}
+            name="name"
+            {...register('name')}
             label="Proyecto"
-            error={errors.project?.message}
+            error={errors.name?.message}
             placeholder="El nombre de tu proyecto"
             autoComplete="off"
             type="text"

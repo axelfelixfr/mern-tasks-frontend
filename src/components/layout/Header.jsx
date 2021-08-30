@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 import { Breakpoints } from './Breakpoints';
@@ -18,6 +18,7 @@ import {
   faSignOutAlt,
   faTasks
 } from '@fortawesome/free-solid-svg-icons';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -34,12 +35,16 @@ const LogoHeader = styled.div`
   }
 `;
 
-export const Header = ({ setOpenModal }) => {
+export const Header = () => {
+  const ProjectsContext = useContext(ProjectContext);
+  const { openModalProject } = ProjectsContext;
+
   const { isTabletOrMobile, isDesktopOrLaptop } = Breakpoints();
 
   const handleOpenModal = () => {
-    setOpenModal(true);
+    openModalProject(true);
   };
+
   return (
     <>
       <HeaderContainer>
