@@ -5,9 +5,9 @@ import { Button, Modal } from 'react-rainbow-components';
 import { FormModal } from './FormModal';
 import { Breakpoints } from '../layout/Breakpoints';
 import { Header } from '../layout/Header';
-import { FormTasks } from './FormTasks';
-import { ListTasks } from './ListTasks';
 import { ProjectContext } from '../../context/ProjectContext';
+import { ListTasks } from './../tasks/ListTasks';
+import { FormTasks } from './../tasks/FormTasks';
 
 const ContainerProjects = styled.div`
   display: flex;
