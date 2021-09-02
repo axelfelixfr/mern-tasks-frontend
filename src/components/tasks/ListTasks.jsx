@@ -5,6 +5,7 @@ import { ButtonIcon } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ProjectContext } from '../../context/ProjectContext';
+import { TasksContext } from '../../context/TasksContext';
 
 const ContainerList = styled.div`
   margin: 30px;
@@ -40,13 +41,17 @@ export const ListTasks = () => {
   const ProjectsContext = useContext(ProjectContext);
   const { selectProject, deleteProject } = ProjectsContext;
 
+  // Context de tareas
+  const ListTasksContext = useContext(TasksContext);
+  const { tasksForProject } = ListTasksContext;
+
   if (!selectProject) {
     return <TitleTasks>Selecciona un proyecto o crea uno</TitleTasks>;
   }
 
   const [actualProject] = selectProject;
 
-  const tasks = [];
+  // const tasks = [];
 
   const handleDeleteProject = () => {
     deleteProject(actualProject.id);
@@ -56,10 +61,10 @@ export const ListTasks = () => {
     <ContainerList>
       <TitleTasks>Proyecto: {actualProject.name}</TitleTasks>
 
-      {!tasks.length ? (
+      {!tasksForProject.length ? (
         <NotFound>No hay tareas</NotFound>
       ) : (
-        tasks.map(task => <Task task={task} key={task.id} />)
+        tasksForProject.map(task => <Task task={task} key={task.id} />)
       )}
 
       <DeleteButton>
