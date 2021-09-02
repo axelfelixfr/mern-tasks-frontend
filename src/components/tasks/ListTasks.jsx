@@ -46,12 +46,7 @@ export const ListTasks = () => {
 
   const [actualProject] = selectProject;
 
-  const tasks = [
-    { id: 1, name: 'Elegir base de datos', complete: true },
-    { id: 2, name: 'Hacer el diseño', complete: false },
-    { id: 3, name: 'Eligir framework', complete: true },
-    { id: 4, name: 'Hacer testing', complete: false }
-  ];
+  const tasks = [];
 
   const handleDeleteProject = () => {
     deleteProject(actualProject.id);

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { ProjectContext } from '../../context/ProjectContext';
+import { TasksContext } from '../../context/TasksContext';
 import { css } from '@emotion/css';
 import {
   VerticalItem,
@@ -10,6 +11,18 @@ import {
 export const ListProjects = () => {
   const ProjectsContext = useContext(ProjectContext);
   const { projects, getProjects, selectedProject } = ProjectsContext;
+
+  // Context de tareas
+  const ListTasksContext = useContext(TasksContext);
+  const { getTasksFromProyect } = ListTasksContext;
+
+  // Seleccionar proyecto
+  const handleProjectSelected = idProject => {
+    // Seleccionar el proyecto al que se dio click
+    selectedProject(idProject);
+    // Filtrar tareas por proyecto
+    getTasksFromProyect(idProject);
+  };
 
   useEffect(() => {
     getProjects();
@@ -37,7 +50,7 @@ export const ListProjects = () => {
           >
             {projects.map(project => (
               <VerticalItem
-                onClick={() => selectedProject(project.id)}
+                onClick={() => handleProjectSelected(project.id)}
                 key={project.id}
                 name={project.name}
                 label={project.name}

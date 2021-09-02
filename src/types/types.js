@@ -4,5 +4,7 @@ export const types = {
   getProjects: '[Projects] Get all projects',
   newProject: '[Projects] New project',
   selectProject: '[Projects] Select project',
-  deleteProject: '[Projects] Delete project'
+  deleteProject: '[Projects] Delete project',
+
+  getTasksFromProject: '[Tasks] Get all tasks from project'
 };
