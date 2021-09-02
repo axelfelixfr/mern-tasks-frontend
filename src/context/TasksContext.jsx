@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import { tasksReducer } from '../reducers/tasksReducer';
 import { types } from '../types/types';
+import { v4 as uuid } from 'uuid';
 
 export const TasksContext = createContext();
 
@@ -36,12 +37,23 @@ const TasksProvider = props => {
     });
   };
 
+  // Agregar nueva tarea al proyecto
+  const addNewTask = task => {
+    const id = uuid();
+    task.id = id;
+    dispatch({
+      type: types.newTask,
+      payload: task
+    });
+  };
+
   return (
     <TasksContext.Provider
       value={{
         tasks: state.tasks,
         tasksForProject: state.tasksForProject,
-        getTasksFromProyect
+        getTasksFromProyect,
+        addNewTask
       }}
     >
       {props.children}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -6,6 +6,8 @@ import { Button, Input } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTasks } from '@fortawesome/free-solid-svg-icons';
 import styled from '@emotion/styled';
+import { TasksContext } from '../../context/TasksContext';
+import { ProjectContext } from '../../context/ProjectContext';
 
 const ContainerFormTasks = styled.div`
   display: flex;
@@ -22,7 +24,7 @@ const ContainerButton = styled.div`
 
 export const FormTasks = () => {
   const schema = yup.object().shape({
-    task: yup
+    name: yup
       .string()
       .min(4)
       .max(30)
@@ -36,14 +38,27 @@ export const FormTasks = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
+    reset
   } = useForm({
     resolver: yupResolver(schema)
   });
 
-  const handleTask = data => {
-    const { task } = data;
-    console.log(task);
+  const ProjectsContext = useContext(ProjectContext);
+  const { selectProject } = ProjectsContext;
+
+  const [actualProject] = selectProject;
+
+  // Context de tareas
+  const ListTasksContext = useContext(TasksContext);
+  const { addNewTask, getTasksFromProyect } = ListTasksContext;
+
+  const handleAddTask = data => {
+    data.projectId = actualProject.id;
+    data.complete = false;
+    addNewTask(data);
+    getTasksFromProyect(data.projectId);
+    reset();
   };
 
   const inputStyles = {
@@ -53,13 +68,13 @@ export const FormTasks = () => {
 
   return (
     <ContainerFormTasks>
-      <form onSubmit={handleSubmit(handleTask)}>
+      <form onSubmit={handleSubmit(handleAddTask)}>
         <Input
           id="input-task"
-          name="task"
-          {...register('task')}
+          name="name"
+          {...register('name')}
           label="Tarea"
-          error={errors.task?.message}
+          error={errors.name?.message}
           placeholder="Tarea para el proyecto"
           autoComplete="off"
           type="text"

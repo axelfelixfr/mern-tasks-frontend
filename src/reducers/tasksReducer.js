@@ -10,6 +10,12 @@ export const tasksReducer = (state = {}, action) => {
         )
       };
 
+    case types.newTask:
+      return {
+        ...state,
+        tasks: [...state.tasks, action.payload]
+      };
+
     default:
       return state;
   }
