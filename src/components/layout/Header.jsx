@@ -8,17 +8,16 @@ import {
   ButtonGroup,
   ButtonIcon,
   ButtonMenu,
-  MenuDivider,
   MenuItem
 } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleDown,
   faPlus,
-  faSignOutAlt,
-  faTasks
+  faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 import { ProjectContext } from '../../context/ProjectContext';
+import { TasksContext } from '../../context/TasksContext';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -39,6 +38,18 @@ export const Header = () => {
   const ProjectsContext = useContext(ProjectContext);
   const { openModalProject, projects, getProjects, selectedProject } =
     ProjectsContext;
+
+  // Context de tareas
+  const ListTasksContext = useContext(TasksContext);
+  const { getTasksFromProyect } = ListTasksContext;
+
+  // Seleccionar proyecto
+  const handleProjectSelected = idProject => {
+    // Seleccionar el proyecto al que se dio click
+    selectedProject(idProject);
+    // Filtrar tareas por proyecto
+    getTasksFromProyect(idProject);
+  };
 
   useEffect(() => {
     getProjects();
@@ -105,7 +116,7 @@ export const Header = () => {
                   <MenuItem label="Tus Proyectos" variant="header" />
                   {projects.map(project => (
                     <MenuItem
-                      onClick={() => selectedProject(project.id)}
+                      onClick={() => handleProjectSelected(project.id)}
                       key={project.id}
                       label={project.name}
                     />

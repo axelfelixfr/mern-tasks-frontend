@@ -47,13 +47,22 @@ const TasksProvider = props => {
     });
   };
 
+  // Eliminar tarea por id
+  const deleteTask = idTask => {
+    dispatch({
+      type: types.deleteTask,
+      payload: idTask
+    });
+  };
+
   return (
     <TasksContext.Provider
       value={{
         tasks: state.tasks,
         tasksForProject: state.tasksForProject,
         getTasksFromProyect,
-        addNewTask
+        addNewTask,
+        deleteTask
       }}
     >
       {props.children}

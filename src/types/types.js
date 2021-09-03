@@ -7,5 +7,6 @@ export const types = {
   deleteProject: '[Projects] Delete project',
 
   getTasksFromProject: '[Tasks] Get all tasks from project',
-  newTask: '[Tasks] New task'
+  newTask: '[Tasks] New task',
+  deleteTask: '[Tasks] Delete task'
 };
