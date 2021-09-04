@@ -24,7 +24,8 @@ const TasksProvider = props => {
         projectId: 3
       }
     ],
-    tasksForProject: null
+    tasksForProject: null,
+    taskSelected: null
   };
 
   const [state, dispatch] = useReducer(tasksReducer, initialState);
@@ -55,14 +56,38 @@ const TasksProvider = props => {
     });
   };
 
+  // Cambia el estado de cada tarea
+  const changeStateTask = task => {
+    dispatch({
+      type: types.changeStateTask,
+      payload: task
+    });
+  };
+
+  // // Obtener tarea para editarla
+  // const getTaskSelected = task => {
+  //   dispatch({
+  //     type: types.getTaskSelected,
+  //     payload: task
+  //   });
+  // };
+
+  const editTask = task => {
+    dispatch({ type: types.editTask, payload: task });
+  };
+
   return (
     <TasksContext.Provider
       value={{
         tasks: state.tasks,
         tasksForProject: state.tasksForProject,
+        taskSelected: state.taskSelected,
         getTasksFromProyect,
         addNewTask,
-        deleteTask
+        deleteTask,
+        changeStateTask,
+        // getTaskSelected
+        editTask
       }}
     >
       {props.children}

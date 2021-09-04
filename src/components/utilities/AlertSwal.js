@@ -14,10 +14,11 @@ const AlertSwal = ({
   Swal.fire({
     title: title,
     showDenyButton: true,
-    confirmButtonColor: '#00A3DC',
+    confirmButtonColor: '#01B6F5',
     showCloseButton: true,
     confirmButtonText: confirmButton,
     denyButtonText: cancelButton,
+    denyButtonColor: '#FE4849',
     icon: iconInitial,
     showClass: {
       popup: 'animate__animated animate__fadeInDown'
@@ -30,7 +31,7 @@ const AlertSwal = ({
       functionSuccess();
       Swal.fire({
         title: titleSuccess,
-        confirmButtonColor: '#00A3DC',
+        confirmButtonColor: '#0091EA',
         showCloseButton: true,
         confirmButtonText: 'Ok',
         icon: iconSuccess
@@ -38,7 +39,7 @@ const AlertSwal = ({
     } else if (result.isDenied) {
       Swal.fire({
         title: titleCancel,
-        confirmButtonColor: '#00A3DC',
+        confirmButtonColor: '#0091EA',
         showCloseButton: true,
         confirmButtonText: 'Ok',
         icon: iconCancel

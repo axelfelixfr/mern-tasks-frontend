@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ButtonGroup, ButtonIcon, Card, Chip } from 'react-rainbow-components';
 import { TasksContext } from '../../context/TasksContext';
 import { ProjectContext } from '../../context/ProjectContext';
+import Swal from 'sweetalert2';
 
 const ContainerTask = styled.div`
   margin-top: 10px;
@@ -27,7 +28,8 @@ export const Task = ({ task }) => {
 
   // Context de tareas
   const ListTasksContext = useContext(TasksContext);
-  const { deleteTask, getTasksFromProyect } = ListTasksContext;
+  const { deleteTask, getTasksFromProyect, changeStateTask, editTask } =
+    ListTasksContext;
 
   const { id, name, complete } = task;
 
@@ -54,6 +56,39 @@ export const Task = ({ task }) => {
     });
   };
 
+  // Función para modificar el state de las tareas (completa/incompleta)
+  const handleChangeTask = task => {
+    // Hacemos la negación del state de la tarea, para que pase de true a false y viceversa
+    task.complete = !task.complete;
+    changeStateTask(task);
+  };
+
+  const handleEditTask = async task => {
+    const { value: title } = await Swal.fire({
+      title: 'Editar tarea',
+      input: 'text',
+      inputLabel: 'Tarea',
+      inputPlaceholder: task.name,
+      inputValidator: value => {
+        return new Promise(resolve => {
+          if (value === '') {
+            resolve('Es necesario escribir algo :)');
+          } else {
+            resolve();
+          }
+        });
+      }
+    });
+
+    if (title) {
+      Swal.fire(`Nueva tarea: ${title}`);
+    }
+
+    task.name = title;
+
+    editTask(task);
+  };
+
   return (
     <ContainerTask>
       <Card
@@ -73,9 +108,7 @@ export const Task = ({ task }) => {
               `}
               label={
                 <>
-                  <TaskLabel
-                  // onClick={handleTaskCheck}
-                  >
+                  <TaskLabel onClick={() => handleChangeTask(task)}>
                     {titleComplete}
                   </TaskLabel>
                 </>
@@ -86,6 +119,7 @@ export const Task = ({ task }) => {
               <ButtonIcon
                 variant="outline-brand"
                 icon={<FontAwesomeIcon icon={faPencilAlt} />}
+                onClick={() => handleEditTask(task)}
               />
               <ButtonIcon
                 variant="destructive"

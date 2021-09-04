@@ -7,6 +7,8 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ProjectContext } from '../../context/ProjectContext';
 import { TasksContext } from '../../context/TasksContext';
 import AlertSwal from '../utilities/AlertSwal';
+import './transition.css';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const ContainerList = styled.div`
   margin: 30px;
@@ -77,8 +79,21 @@ export const ListTasks = () => {
       {!tasksForProject.length ? (
         <NotFound>No hay tareas</NotFound>
       ) : (
-        tasksForProject.map(task => <Task task={task} key={task.id} />)
+        <TransitionGroup>
+          {tasksForProject.map(task => (
+            <CSSTransition key={task.id} timeout={500} classNames="item">
+              <Task task={task} />
+            </CSSTransition>
+          ))}
+        </TransitionGroup>
       )}
+      {/* tasksForProject.map(task => (
+          <Task
+            className="animate__animated animate__fadeInDown"
+            task={task}
+            key={task.id}
+          />
+        )) */}
 
       <DeleteButton>
         <ButtonIcon

@@ -53,6 +53,7 @@ export const Header = () => {
 
   useEffect(() => {
     getProjects();
+    // eslint-disable-next-line
   }, []);
 
   const { isTabletOrMobile, isDesktopOrLaptop } = Breakpoints();

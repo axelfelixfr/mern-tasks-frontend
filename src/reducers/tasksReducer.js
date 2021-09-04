@@ -13,7 +13,7 @@ export const tasksReducer = (state = {}, action) => {
     case types.newTask:
       return {
         ...state,
-        tasks: [...state.tasks, action.payload]
+        tasks: [action.payload, ...state.tasks]
       };
 
     case types.deleteTask:
@@ -21,6 +21,21 @@ export const tasksReducer = (state = {}, action) => {
         ...state,
         tasks: state.tasks.filter(task => task.id !== action.payload)
       };
+
+    case types.editTask:
+    case types.changeStateTask:
+      return {
+        ...state,
+        tasks: state.tasks.map(task =>
+          task.id === action.payload.id ? action.payload : task
+        )
+      };
+
+    // case types.getTaskSelected:
+    //   return {
+    //     ...state,
+    //     taskSelected: action.payload
+    //   };
 
     default:
       return state;

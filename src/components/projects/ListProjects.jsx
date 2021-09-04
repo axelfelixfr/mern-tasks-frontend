@@ -2,12 +2,13 @@ import React, { useContext, useEffect } from 'react';
 import { ProjectContext } from '../../context/ProjectContext';
 import { TasksContext } from '../../context/TasksContext';
 import { css } from '@emotion/css';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import {
   VerticalItem,
   VerticalNavigation,
   VerticalSection
 } from 'react-rainbow-components';
-
+import '../tasks/transition.css';
 export const ListProjects = () => {
   const ProjectsContext = useContext(ProjectContext);
   const { projects, getProjects, selectedProject } = ProjectsContext;
@@ -26,14 +27,12 @@ export const ListProjects = () => {
 
   useEffect(() => {
     getProjects();
+    // eslint-disable-next-line
   }, []);
 
   return (
     <>
-      <VerticalNavigation
-      // selectedItem={selectedItem}
-      //       onSelect={this.handleOnSelect}
-      >
+      <VerticalNavigation>
         {!projects.length ? (
           <VerticalSection
             label="No hay proyectos"
@@ -48,14 +47,17 @@ export const ListProjects = () => {
               text-align: center;
             `}
           >
-            {projects.map(project => (
-              <VerticalItem
-                onClick={() => handleProjectSelected(project.id)}
-                key={project.id}
-                name={project.name}
-                label={project.name}
-              />
-            ))}
+            <TransitionGroup>
+              {projects.map(project => (
+                <CSSTransition key={project.id} timeout={500} classNames="item">
+                  <VerticalItem
+                    onClick={() => handleProjectSelected(project.id)}
+                    name={'item' + project.id}
+                    label={project.name}
+                  />
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
           </VerticalSection>
         )}
       </VerticalNavigation>

@@ -8,5 +8,8 @@ export const types = {
 
   getTasksFromProject: '[Tasks] Get all tasks from project',
   newTask: '[Tasks] New task',
-  deleteTask: '[Tasks] Delete task'
+  deleteTask: '[Tasks] Delete task',
+  changeStateTask: '[Tasks] Change state task',
+  // getTaskSelected: '[Tasks] Get task selected'
+  editTask: '[Tasks] Edit task'
 };
