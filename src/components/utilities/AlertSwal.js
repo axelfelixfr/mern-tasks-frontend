@@ -31,7 +31,7 @@ const AlertSwal = ({
       functionSuccess();
       Swal.fire({
         title: titleSuccess,
-        confirmButtonColor: '#0091EA',
+        confirmButtonColor: '#01B6F5',
         showCloseButton: true,
         confirmButtonText: 'Ok',
         icon: iconSuccess
@@ -39,7 +39,7 @@ const AlertSwal = ({
     } else if (result.isDenied) {
       Swal.fire({
         title: titleCancel,
-        confirmButtonColor: '#0091EA',
+        confirmButtonColor: '#01B6F5',
         showCloseButton: true,
         confirmButtonText: 'Ok',
         icon: iconCancel

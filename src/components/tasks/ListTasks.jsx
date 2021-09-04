@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import styled from '@emotion/styled';
+import '../utilities/transition.css';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Task } from './Task';
 import { ButtonIcon } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,8 +9,6 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ProjectContext } from '../../context/ProjectContext';
 import { TasksContext } from '../../context/TasksContext';
 import AlertSwal from '../utilities/AlertSwal';
-import './transition.css';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 const ContainerList = styled.div`
   margin: 30px;

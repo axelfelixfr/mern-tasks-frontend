@@ -36,7 +36,7 @@ export const FormModal = () => {
       .max(15)
       .required()
       .matches(
-        /^[a-zA-Z\s\xE1\xE9\xED\xF3\xFA\xC1\xC9\xCD\xD3\xDA]{3,}$/,
+        /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g,
         'Must be only letters'
       )
   });

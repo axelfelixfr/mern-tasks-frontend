@@ -3,12 +3,13 @@ import { ProjectContext } from '../../context/ProjectContext';
 import { TasksContext } from '../../context/TasksContext';
 import { css } from '@emotion/css';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import '../utilities/transition.css';
 import {
   VerticalItem,
   VerticalNavigation,
   VerticalSection
 } from 'react-rainbow-components';
-import '../tasks/transition.css';
+
 export const ListProjects = () => {
   const ProjectsContext = useContext(ProjectContext);
   const { projects, getProjects, selectedProject } = ProjectsContext;

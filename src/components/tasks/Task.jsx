@@ -46,8 +46,9 @@ export const Task = ({ task }) => {
       confirmButton: 'Eliminar',
       cancelButton: 'Cancelar',
       functionSuccess: () => {
-        deleteTask(idTask);
-        getTasksFromProyect(actualProject.id);
+        // Le enviamos lo que queremos si confirmo la eliminación
+        deleteTask(idTask); // Eliminamos la tarea
+        getTasksFromProyect(actualProject.id); // Obtenemos las tareas del proyecto para refrescar las tareas
       },
       titleSuccess: '¡Tarea eliminada!',
       iconSuccess: 'success',
@@ -64,16 +65,39 @@ export const Task = ({ task }) => {
   };
 
   const handleEditTask = async task => {
+    // Algoritmo para aceptar sólo letras con acentos y ñ
+    const regex =
+      /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/g;
     const { value: title } = await Swal.fire({
       title: 'Editar tarea',
+      showCloseButton: true,
       input: 'text',
       inputLabel: 'Tarea',
       inputPlaceholder: task.name,
+      showCancelButton: true,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#01B6F5',
+      confirmButtonText: 'Guardar',
+      cancelButtonColor: '#FE4849',
       inputValidator: value => {
-        return new Promise(resolve => {
-          if (value === '') {
-            resolve('Es necesario escribir algo :)');
+        return new Promise((resolve, reject) => {
+          if (
+            value === '' ||
+            value.length < 4 ||
+            !regex.test(value) ||
+            value.length > 30
+          ) {
           } else {
+            // Si pasa la validación, entonces editamos la tarea
+            task.name = value; // Tomamos el value para colocarlo en la propiedad 'name'
+            editTask(task); // Editamos la tarea
+            // Resolvemos la promesa
             resolve();
           }
         });
@@ -81,12 +105,14 @@ export const Task = ({ task }) => {
     });
 
     if (title) {
-      Swal.fire(`Nueva tarea: ${title}`);
+      Swal.fire({
+        title: `Actualización de tarea: ${title}`,
+        confirmButtonColor: '#01B6F5',
+        showCloseButton: true,
+        confirmButtonText: 'Ok',
+        icon: 'success'
+      });
     }
-
-    task.name = title;
-
-    editTask(task);
   };
 
   return (
