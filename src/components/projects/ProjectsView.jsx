@@ -35,14 +35,11 @@ export const ProjectsView = () => {
           isOpen={modalProject}
           onRequestClose={() => openModalProject(false)}
           footer={
-            <div className="rainbow-flex rainbow-justify_end">
-              <Button
-                className="rainbow-m-right_large"
-                label="Cancelar"
-                variant="destructive"
-                onClick={() => openModalProject(false)}
-              />
-            </div>
+            <Button
+              label="Cancelar"
+              variant="destructive"
+              onClick={() => openModalProject(false)}
+            />
           }
         >
           <FormModal />

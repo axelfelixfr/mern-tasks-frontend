@@ -37,11 +37,7 @@ export const SideBar = () => {
         `}
       >
         <Logo>
-          <Chip
-            className="rainbow-m-around_medium"
-            label="ProjectsMERN"
-            variant="neutral"
-          />
+          <Chip label="ProjectsMERN" variant="neutral" />
           <img
             src={LogoTask}
             alt="Logo Task"

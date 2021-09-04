@@ -56,10 +56,7 @@ export const FormModal = () => {
 
   return (
     <>
-      <form
-        className="rainbow-align-content_center"
-        onSubmit={handleSubmit(handleProject)}
-      >
+      <form onSubmit={handleSubmit(handleProject)}>
         <ContainerForm>
           <Input
             id="input-project"
@@ -71,24 +68,12 @@ export const FormModal = () => {
             autoComplete="off"
             type="text"
             style={inputStyles}
-            className="rainbow-m-vertical_x-large rainbow-p-horizontal_medium rainbow-m_auto"
-            icon={
-              <FontAwesomeIcon
-                icon={faProjectDiagram}
-                className="rainbow-color_gray-3"
-              />
-            }
+            icon={<FontAwesomeIcon icon={faProjectDiagram} />}
           />
         </ContainerForm>
 
         <ContainerButton>
-          <Button
-            shaded
-            label="Crear proyecto"
-            type="submit"
-            variant="brand"
-            className="rainbow-m-around_medium"
-          />
+          <Button shaded label="Crear proyecto" type="submit" variant="brand" />
         </ContainerButton>
       </form>
     </>

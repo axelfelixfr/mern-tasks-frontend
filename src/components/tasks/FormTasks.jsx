@@ -78,19 +78,11 @@ export const FormTasks = () => {
           autoComplete="off"
           type="text"
           style={inputStyles}
-          className="rainbow-m-vertical_x-large rainbow-p-horizontal_medium rainbow-m_auto"
-          icon={
-            <FontAwesomeIcon icon={faTasks} className="rainbow-color_gray-3" />
-          }
+          icon={<FontAwesomeIcon icon={faTasks} />}
         />
 
         <ContainerButton>
-          <Button
-            label="Enviar tarea"
-            type="submit"
-            variant="brand"
-            className="rainbow-m-around_medium"
-          />
+          <Button label="Enviar tarea" type="submit" variant="brand" />
         </ContainerButton>
       </form>
     </ContainerFormTasks>

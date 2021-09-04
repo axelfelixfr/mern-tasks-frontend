@@ -78,12 +78,7 @@ export const Header = () => {
         <LogoHeader>
           {isTabletOrMobile && (
             <>
-              <img
-                src={LogoTask}
-                alt="rainbow logo"
-                height="50"
-                className="rainbow-m-left_medium react-rainbow-global-header_logo"
-              />
+              <img src={LogoTask} alt="rainbow logo" height="50" />
               {/* <h4
                     className={css`
                       margin: 0;
@@ -141,7 +136,7 @@ export const Header = () => {
         >
           {isDesktopOrLaptop && (
             <Button variant="destructive">
-              Cerrar sesión{' '}
+              Cerrar sesión
               <FontAwesomeIcon
                 icon={faSignOutAlt}
                 className={css`
