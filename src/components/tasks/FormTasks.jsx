@@ -38,8 +38,7 @@ export const FormTasks = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset
+    formState: { errors }
   } = useForm({
     resolver: yupResolver(schema)
   });
@@ -53,12 +52,12 @@ export const FormTasks = () => {
   const ListTasksContext = useContext(TasksContext);
   const { addNewTask, getTasksFromProyect } = ListTasksContext;
 
-  const handleAddTask = data => {
+  const handleAddTask = (data, e) => {
     data.projectId = actualProject.id;
     data.complete = false;
     addNewTask(data);
     getTasksFromProyect(data.projectId);
-    reset();
+    e.target.reset(); // reset after form submit
   };
 
   const inputStyles = {

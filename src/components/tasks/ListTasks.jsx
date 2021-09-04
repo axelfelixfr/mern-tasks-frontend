@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ProjectContext } from '../../context/ProjectContext';
 import { TasksContext } from '../../context/TasksContext';
+import AlertSwal from '../utilities/AlertSwal';
 
 const ContainerList = styled.div`
   margin: 30px;
@@ -54,7 +55,19 @@ export const ListTasks = () => {
   // const tasks = [];
 
   const handleDeleteProject = () => {
-    deleteProject(actualProject.id);
+    AlertSwal({
+      title: '¿Estas seguro(a) de eliminar este proyecto?',
+      iconInitial: 'question',
+      confirmButton: 'Eliminar',
+      cancelButton: 'Cancelar',
+      functionSuccess: () => {
+        deleteProject(actualProject.id);
+      },
+      titleSuccess: '¡Proyecto eliminado!',
+      iconSuccess: 'success',
+      titleCancel: 'Acción cancelada',
+      iconCancel: 'info'
+    });
   };
 
   return (

@@ -3,11 +3,11 @@ import { SideBar } from '../layout/SideBar';
 import styled from '@emotion/styled';
 import { Button, Modal } from 'react-rainbow-components';
 import { FormModal } from './FormModal';
-import { Breakpoints } from '../layout/Breakpoints';
 import { Header } from '../layout/Header';
 import { ProjectContext } from '../../context/ProjectContext';
 import { ListTasks } from './../tasks/ListTasks';
 import { FormTasks } from './../tasks/FormTasks';
+import { Breakpoints } from '../utilities/Breakpoints';
 
 const ContainerProjects = styled.div`
   display: flex;

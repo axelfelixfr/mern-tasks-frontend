@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
+import { Breakpoints } from '../utilities/Breakpoints';
+import LogoTask from '../../assets/task.svg';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
-import { Breakpoints } from './Breakpoints';
-import LogoTask from '../../assets/task.svg';
 import {
   Button,
   ButtonGroup,
@@ -140,7 +140,15 @@ export const Header = () => {
           `}
         >
           {isDesktopOrLaptop && (
-            <Button label="Cerrar sesión" variant="destructive" />
+            <Button variant="destructive">
+              Cerrar sesión{' '}
+              <FontAwesomeIcon
+                icon={faSignOutAlt}
+                className={css`
+                  margin-left: 10px;
+                `}
+              />
+            </Button>
           )}
 
           {isTabletOrMobile && (
